@@ -400,7 +400,7 @@ Python &gt;=2.4
 <h2 id="Linux安装pyinotify"><a href="#Linux安装pyinotify" class="headerlink" title="Linux安装pyinotify"></a>Linux安装pyinotify</h2><pre><code>git clone https://github.com/seb-m/pyinotify.git
 cd pyinotify
 python setup.py install
-</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">python -m pyinotify -v /usr/<span class="built_in">local</span>/tomcat</div><div class="line"><span class="comment">#监控/usr/local/tomcat目录变化，这样日志会输出到当前控制台</span></div><div class="line">nohup -m pyinotify -v /usr/<span class="built_in">local</span>/tomcat &gt;/var/<span class="built_in">log</span>/pyinotify.log &amp;</div><div class="line"><span class="comment">#记录到文件并进程后台运行</span></div></pre></td></tr></table></figure>
+</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">python -m pyinotify -v /usr/<span class="built_in">local</span>/tomcat</div><div class="line"><span class="comment">#监控/usr/local/tomcat目录变化，这样日志会输出到当前控制台</span></div><div class="line">nohup -m pyinotify -v /usr/<span class="built_in">local</span>/tomcat &gt;/var/<span class="built_in">log</span>/pyinotify.log &amp;</div><div class="line"><span class="comment">#记录到文件并进程后台运行</span></div></pre></td></tr></table></figure>
 
       
     </div>

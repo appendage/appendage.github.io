@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/08/docker/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2017/06/08/docker/" itemprop="url">Debian下安装Docker</a></h1>
         
 
         <div class="post-meta">
@@ -339,7 +339,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-08T08:35:37+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-08T14:50:33+08:00">
                 2017-06-08
               </time>
             
@@ -349,6 +349,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -375,57 +397,15 @@
 
       
         
-          
-            <h1 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h1><pre><code>Docker有两个版本：社区版（CE)和企业版(EE)。
-</code></pre><h2 id="Install-Docker-for-Debian"><a href="#Install-Docker-for-Debian" class="headerlink" title="Install Docker for Debian"></a>Install Docker for Debian</h2><h3 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h3><p>Debian不支持Docker EE。</p>
-<h4 id="操作系统要求"><a href="#操作系统要求" class="headerlink" title="操作系统要求"></a>操作系统要求</h4><p>要安装Docker,您需要64为版本的Debian或Raspbian版本之一：</p>
-<ul>
-<li>Stretch(testing)</li>
-<li>jessie 8.0(LTS) / Raspbian jessie</li>
-<li>Wheezy 7.7(LTS)</li>
-<li>内核版本至少3.10<br>Docker支持x86_64和armhf架构的jessie和Stretch</li>
-</ul>
-<h3 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h3><p>较老版本的Docker被称为docker或docker-engine。如果这些已安装，请卸载它们：<br>    <code>$ apt-get remove docker docker-engine</code></p>
-<h3 id="安装Docker-CE"><a href="#安装Docker-CE" class="headerlink" title="安装Docker CE"></a>安装Docker CE</h3><p>您可以根据需要以不同的方式安装Docker CE：</p>
-<ul>
-<li>大多数用户 设置了Docker的存储库并从中安装，以方便安装和升级任务。这是推荐的方法。</li>
-<li>一些用户下载DEB软件包并手动安装并手动管理升级。这在没有访问互联网的系统上安装Docker的情况下是有用的。<h4 id="使用存储库安装"><a href="#使用存储库安装" class="headerlink" title="使用存储库安装"></a>使用存储库安装</h4>在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，可以从存储库安装和更新<br><em>设置存储库</em></li>
-</ul>
-<ol>
-<li>安装软件以允许apt通过HTTPS使用存储库：<br> jessie或Stretch:<pre><code>`$ apt-get install \
-apt-transport-https \
-ca-certificates \
-curl \
-gnupg2 \
-software-properties-common`
-</code></pre> Wheezy:<pre><code>`$ apt-get install \
-apt-transport-https \
-ca-certificates \
-curl \
-python-software-properties`
-</code></pre></li>
-<li><p>添加Docker的官方GPG密钥：</p>
-<pre><code>`$ curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -`
-</code></pre><p> 验证密钥ID是否9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88。</p>
-<pre><code>$ apt-key fingerprint 0EBFCD88
-
-pub   4096R/0EBFCD88 2017-02-22
-    Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-uid                  Docker Release (CE deb) &lt;docker@docker.com&gt;
-sub   4096R/F273FCD8 2017-02-22
-</code></pre></li>
-<li>使用以下命令设置stable版本库<br> am64:<pre><code>$ add-apt-repository \
-    &quot;deb [arch=amd64] https://download.docker.com/linux/debian \
-    $(lsb_release -cs) \
-    stable&quot;
-</code></pre> armhf:<pre><code>$ echo &quot;deb [arch=armhf] https://download.docker.com/linux/debian \
-$(lsb_release -cs) stable&quot; | \
-sudo tee /etc/apt/sources.list.d/docker.list
-</code></pre></li>
-<li>仅限Wheezy：Wheezy的版本add-apt-repository添加了deb-src 不存在的存储库。您需要注释掉该存储库或运行apt-get update将失败。编辑/etc/apt/sources.list。找到如下所示的行，并将其注释掉或删除它：<br> deb-src [arch=amd64] <a href="https://download.docker.com/linux/debian" target="_blank" rel="external">https://download.docker.com/linux/debian</a> wheezy stable<h4 id="安装DOCKER-CE"><a href="#安装DOCKER-CE" class="headerlink" title="安装DOCKER CE"></a>安装DOCKER CE</h4> apt-get update<br> apt-get install docker-ce</li>
-</ol>
-
-          
+          <pre><code>Docker有两个版本：社区版（CE)和企业版(EE)。
+</code></pre><h2 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h2><h3 id="Docker-EE用户"><a href="#Docker-EE用户" class="headerlink" title="Docker EE用户"></a>Docker EE用户</h3><p>Debian不支持Docker EE。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/08/docker/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -689,8 +669,8 @@ sudo tee /etc/apt/sources.list.d/docker.list
 
       
         
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkdir tomcat  <span class="comment">#新建tomcat文件夹</span></div></pre></td></tr></table></figure>
-<p>进入tomcat文件夹，下载apache-tomcat-7.0.77.tar.gz和jdk-8u131-linux-x64.tar.gz<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$ vim Dockerfile <span class="comment">#新建Dockerfile构建镜像</span></div><div class="line">    FROM debian:7    <span class="comment">#基础镜像为debian7</span></div><div class="line">    MAINTAINER JiaHan &lt;jh_jiahan@163.com&gt;</div><div class="line">    ENV REFRESHED 2017-05-04</div><div class="line">    ADD apache-tomcat-7.0.77.tar.gz /usr/<span class="built_in">local</span>/</div><div class="line">    ADD jdk-8u131-linux-x64.tar.gz /usr/<span class="built_in">local</span>/java/</div><div class="line">    ENV JAVA_HOME /usr/<span class="built_in">local</span>/java/jdk1.8.0_131</div><div class="line">    ENV JRE_HOME /usr/<span class="built_in">local</span>/java/jdk1.8.0_131/jre</div><div class="line">    ENV CLASSPATH .:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JRE_HOME</span>/lib</div><div class="line">    ENV PATH <span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</div><div class="line">    ENV CATALINA_HOME /usr/<span class="built_in">local</span>/apache-tomcat-7.0.77</div><div class="line">    EXPOSE 8080</div><div class="line">    CMD [<span class="string">"/usr/local/apache-tomcat-7.0.77/bin/catalina.sh"</span>,<span class="string">"run"</span>]</div><div class="line">$ docker build -t docker_tomcat7</div><div class="line">$ docker images docker_tomcat7 <span class="comment">#查看新镜像</span></div><div class="line">$ docker run <span class="_">-d</span> -p 8080:8080 --name tomcat7 docker_tomcat7 <span class="comment">#-p 将容器端口8080映射到宿主机8080</span></div><div class="line">测试 ：使用浏览器访问宿主机8080端口</div></pre></td></tr></table></figure></p>
+          <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ mkdir tomcat  <span class="comment">#新建tomcat文件夹</span></div></pre></td></tr></table></figure>
+<p>进入tomcat文件夹，下载apache-tomcat-7.0.77.tar.gz和jdk-8u131-linux-x64.tar.gz<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ vim Dockerfile <span class="comment">#新建Dockerfile构建镜像</span></div><div class="line">    FROM debian:7    <span class="comment">#基础镜像为debian7</span></div><div class="line">    MAINTAINER JiaHan &lt;jh_jiahan@163.com&gt;</div><div class="line">    ENV REFRESHED 2017-05-04</div><div class="line">    ADD apache-tomcat-7.0.77.tar.gz /usr/<span class="built_in">local</span>/</div><div class="line">    ADD jdk-8u131-linux-x64.tar.gz /usr/<span class="built_in">local</span>/java/</div><div class="line">    ENV JAVA_HOME /usr/<span class="built_in">local</span>/java/jdk1.8.0_131</div><div class="line">    ENV JRE_HOME /usr/<span class="built_in">local</span>/java/jdk1.8.0_131/jre</div><div class="line">    ENV CLASSPATH .:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JRE_HOME</span>/lib</div><div class="line">    ENV PATH <span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</div><div class="line">    ENV CATALINA_HOME /usr/<span class="built_in">local</span>/apache-tomcat-7.0.77</div><div class="line">    EXPOSE 8080</div><div class="line">    CMD [<span class="string">"/usr/local/apache-tomcat-7.0.77/bin/catalina.sh"</span>,<span class="string">"run"</span>]</div><div class="line">$ docker build -t docker_tomcat7</div><div class="line">$ docker images docker_tomcat7 <span class="comment">#查看新镜像</span></div><div class="line">$ docker run <span class="_">-d</span> -p 8080:8080 --name tomcat7 docker_tomcat7 <span class="comment">#-p 将容器端口8080映射到宿主机8080</span></div><div class="line">测试 ：使用浏览器访问宿主机8080端口</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/05/04/docker_tomcat/#more" rel="contents">
@@ -1249,8 +1229,8 @@ mysql 5.5.47
 
       
         
-          <h1 id="Heartbeat"><a href="#Heartbeat" class="headerlink" title="Heartbeat"></a>Heartbeat</h1><h2 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#cd到heartbeat依赖包目录执行</span></div><div class="line">dpkg -i *.deb    <span class="comment">#如果报错,再次执行一次</span></div></pre></td></tr></table></figure>
-<h2 id="安装Heartbeat"><a href="#安装Heartbeat" class="headerlink" title="安装Heartbeat"></a>安装Heartbeat</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dpkg -i heartbeat_3.0.5-3_amd64.deb</div></pre></td></tr></table></figure>
+          <h1 id="Heartbeat"><a href="#Heartbeat" class="headerlink" title="Heartbeat"></a>Heartbeat</h1><h2 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment">#cd到heartbeat依赖包目录执行</span></div><div class="line">dpkg -i *.deb    <span class="comment">#如果报错,再次执行一次</span></div></pre></td></tr></table></figure>
+<h2 id="安装Heartbeat"><a href="#安装Heartbeat" class="headerlink" title="安装Heartbeat"></a>安装Heartbeat</h2><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">dpkg -i heartbeat_3.0.5-3_amd64.deb</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/21/pacemaker/#more" rel="contents">
