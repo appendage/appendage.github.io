@@ -377,36 +377,54 @@
         
           
             <h1 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h1><pre><code>Docker有两个版本：社区版（CE)和企业版(EE)。
-</code></pre><h2 id="Install-Docker-for-Debian"><a href="#Install-Docker-for-Debian" class="headerlink" title="Install Docker for Debian"></a>Install Docker for Debian</h2><h3 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h3><p>Debian不支持Docker EE。<br>操作系统要求<br>要安装Docker,您需要64为版本的Debian或Raspbian版本之一：</p>
-<pre><code>- Stretch(testing)
-- jessie 8.0(LTS) / Raspbian jessie
-- Wheezy 7.7(LTS)
-- 内核版本至少3.10
-</code></pre><p>Docker支持x86_64和armhf架构的jessie和Stretch</p>
-<h3 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h3><p>较老版本的Docker被称为docker或docker-engine。如果这些已安装，请卸载它们：<br>    $ apt-get remove docker docker-engine</p>
+</code></pre><h2 id="Install-Docker-for-Debian"><a href="#Install-Docker-for-Debian" class="headerlink" title="Install Docker for Debian"></a>Install Docker for Debian</h2><h3 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h3><p>Debian不支持Docker EE。</p>
+<h4 id="操作系统要求"><a href="#操作系统要求" class="headerlink" title="操作系统要求"></a>操作系统要求</h4><p>要安装Docker,您需要64为版本的Debian或Raspbian版本之一：</p>
+<ul>
+<li>Stretch(testing)</li>
+<li>jessie 8.0(LTS) / Raspbian jessie</li>
+<li>Wheezy 7.7(LTS)</li>
+<li>内核版本至少3.10<br>Docker支持x86_64和armhf架构的jessie和Stretch</li>
+</ul>
+<h3 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h3><p>较老版本的Docker被称为docker或docker-engine。如果这些已安装，请卸载它们：<br>    <code>$ apt-get remove docker docker-engine</code></p>
 <h3 id="安装Docker-CE"><a href="#安装Docker-CE" class="headerlink" title="安装Docker CE"></a>安装Docker CE</h3><p>您可以根据需要以不同的方式安装Docker CE：</p>
-<pre><code>- 大多数用户 设置了Docker的存储库并从中安装，以方便安装和升级任务。这是推荐的方法。
-- 一些用户下载DEB软件包并手动安装并手动管理升级。这在没有访问互联网的系统上安装Docker的情况下是有用的。
-</code></pre><h4 id="使用存储库安装"><a href="#使用存储库安装" class="headerlink" title="使用存储库安装"></a>使用存储库安装</h4><p>在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，可以从存储库安装和更新<br>设置存储库<br>    1.安装软件以允许apt通过HTTPS使用存储库：<br>    jessie或Stretch:<br>        $ apt-get install \<br>        apt-transport-https \<br>        ca-certificates \<br>        curl \<br>        gnupg2 \<br>        software-properties-common<br>    Wheezy:<br>        $ apt-get install \<br>        apt-transport-https \<br>        ca-certificates \<br>        curl \<br>        python-software-properties<br>    2.添加Docker的官方GPG密钥：<br>        $ curl -fsSL <a href="https://download.docker.com/linux/debian/gpg" target="_blank" rel="external">https://download.docker.com/linux/debian/gpg</a> | apt-key add -<br>    验证密钥ID是否9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88。<br>        $ apt-key fingerprint 0EBFCD88</p>
-<pre><code>    pub   4096R/0EBFCD88 2017-02-22
-        Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-    uid                  Docker Release (CE deb) &lt;docker@docker.com&gt;
-    sub   4096R/F273FCD8 2017-02-22
-3.使用以下命令设置stable版本库
-am64:
-    $ add-apt-repository \
-        &quot;deb [arch=amd64] https://download.docker.com/linux/debian \
-        $(lsb_release -cs) \
-        stable&quot;
-armhf:
-    $ echo &quot;deb [arch=armhf] https://download.docker.com/linux/debian \
-    $(lsb_release -cs) stable&quot; | \
-    sudo tee /etc/apt/sources.list.d/docker.list
-4.仅限Wheezy：Wheezy的版本add-apt-repository添加了deb-src 不存在的存储库。您需要注释掉该存储库或运行apt-get update将失败。编辑/etc/apt/sources.list。找到如下所示的行，并将其注释掉或删除它：
-deb-src [arch=amd64] https://download.docker.com/linux/debian wheezy stable
-</code></pre><h4 id="安装DOCKER-CE"><a href="#安装DOCKER-CE" class="headerlink" title="安装DOCKER CE"></a>安装DOCKER CE</h4><pre><code>apt-get update
-apt-get install docker-ce
-</code></pre>
+<ul>
+<li>大多数用户 设置了Docker的存储库并从中安装，以方便安装和升级任务。这是推荐的方法。</li>
+<li>一些用户下载DEB软件包并手动安装并手动管理升级。这在没有访问互联网的系统上安装Docker的情况下是有用的。<h4 id="使用存储库安装"><a href="#使用存储库安装" class="headerlink" title="使用存储库安装"></a>使用存储库安装</h4>在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，可以从存储库安装和更新<br><em>设置存储库</em></li>
+</ul>
+<ol>
+<li>安装软件以允许apt通过HTTPS使用存储库：<br> jessie或Stretch:<pre><code>`$ apt-get install \
+apt-transport-https \
+ca-certificates \
+curl \
+gnupg2 \
+software-properties-common`
+</code></pre> Wheezy:<pre><code>`$ apt-get install \
+apt-transport-https \
+ca-certificates \
+curl \
+python-software-properties`
+</code></pre></li>
+<li><p>添加Docker的官方GPG密钥：</p>
+<pre><code>`$ curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -`
+</code></pre><p> 验证密钥ID是否9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88。</p>
+<pre><code>$ apt-key fingerprint 0EBFCD88
+
+pub   4096R/0EBFCD88 2017-02-22
+    Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+uid                  Docker Release (CE deb) &lt;docker@docker.com&gt;
+sub   4096R/F273FCD8 2017-02-22
+</code></pre></li>
+<li>使用以下命令设置stable版本库<br> am64:<pre><code>$ add-apt-repository \
+    &quot;deb [arch=amd64] https://download.docker.com/linux/debian \
+    $(lsb_release -cs) \
+    stable&quot;
+</code></pre> armhf:<pre><code>$ echo &quot;deb [arch=armhf] https://download.docker.com/linux/debian \
+$(lsb_release -cs) stable&quot; | \
+sudo tee /etc/apt/sources.list.d/docker.list
+</code></pre></li>
+<li>仅限Wheezy：Wheezy的版本add-apt-repository添加了deb-src 不存在的存储库。您需要注释掉该存储库或运行apt-get update将失败。编辑/etc/apt/sources.list。找到如下所示的行，并将其注释掉或删除它：<br> deb-src [arch=amd64] <a href="https://download.docker.com/linux/debian" target="_blank" rel="external">https://download.docker.com/linux/debian</a> wheezy stable<h4 id="安装DOCKER-CE"><a href="#安装DOCKER-CE" class="headerlink" title="安装DOCKER CE"></a>安装DOCKER CE</h4> apt-get update<br> apt-get install docker-ce</li>
+</ol>
+
           
         
       
